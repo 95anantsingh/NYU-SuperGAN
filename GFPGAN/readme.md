@@ -3,7 +3,11 @@ cd GFPGAN/GFPGAN-master/
 Download pre-trained models
 wget https://github.com/TencentARC/GFPGAN/releases/download/v1.3.0/GFPGANv1.3.pth -P experiments/pretrained_models
 
-BASICSR_JIT=True python inference_gfpgan.py --input inputs/whole_imgs --output results --version 1 --aligned
+wget https://github.com/TencentARC/GFPGAN/releases/download/v0.2.0/GFPGANCleanv1-NoCE-C2.pth -P experiments/pretrained_models
+
+wget https://github.com/TencentARC/GFPGAN/releases/download/v0.1.0/GFPGANv1.pth -P experiments/pretrained_models
+
+BASICSR_JIT=True python inference_gfpgan.py --input inputs/whole_imgs/frames --output results --version 1.2 --aligned
 
 python inference_gfpgan.py --input inputs/whole_imgs --output results --version 1 --aligned
 [options]...
