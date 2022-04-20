@@ -31,7 +31,7 @@ def display_video(video_path, width=640, clear=True):
 weights_dir = './weights'
 
 # Number of finetune iterations on the source subject: min:100, max:2000, step:1
-finetune_iterations = 2000
+finetune_iterations = 1000
 
 # If True, the inner part of the mouth will be removed from the segmentation:
 seg_remove_mouth = True
@@ -81,7 +81,7 @@ target_path = './fsgan/docs/examples/conan_obrien.mp4'
 select_target = 'longest'
 
 output_tmp_path = './output/output_tmp.mp4'
-output_path = './output/output3.mp4'
+output_path = './output/output.mp4'
 
 face_swapping(source_path, target_path, output_tmp_path,
               select_source, select_target, finetune)
