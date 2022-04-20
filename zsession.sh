@@ -1,5 +1,10 @@
-echo
-echo "Getting Session..."
-srun -c20 --mem=32GB --gres=gpu:1 --gres=gpu:rtx8000:1 -t10:00:00 --pty /bin/bash
+# requires three commandline args - 
+# 1. CPU cores required
+# 2. RAM in GB
+# 3. GPU required
 
-srun -c1 --mem=1GB --gres=gpu:1 -t1:00:00 --pty /bin/bash
+echo
+echo "Getting Session with $1 Cores, $2 GB Ram, $3 GPUs..."
+srun -c$1 --mem="$2GB" --gres=gpu:rtx8000:$3 --pty /bin/bash
+
+# srun -c1 --mem=1GB --gres=gpu:1 -t1:00:00 --pty /bin/bash
