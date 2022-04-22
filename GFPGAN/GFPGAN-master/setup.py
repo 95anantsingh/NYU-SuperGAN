@@ -87,10 +87,6 @@ if __name__ == '__main__':
         description='GFPGAN aims at developing Practical Algorithms for Real-world Face Restoration',
         long_description=readme(),
         long_description_content_type='text/markdown',
-        author='Xintao Wang',
-        author_email='xintao.wang@outlook.com',
-        keywords='computer vision, pytorch, image restoration, super-resolution, face restoration, gan, gfpgan',
-        url='https://github.com/TencentARC/GFPGAN',
         include_package_data=True,
         packages=find_packages(exclude=('options', 'datasets', 'experiments', 'results', 'tb_logger', 'wandb')),
         classifiers=[
@@ -101,7 +97,6 @@ if __name__ == '__main__':
             'Programming Language :: Python :: 3.7',
             'Programming Language :: Python :: 3.8',
         ],
-        license='Apache License Version 2.0',
         setup_requires=['cython', 'numpy'],
         install_requires=get_requirements(),
         zip_safe=False)

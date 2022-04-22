@@ -204,7 +204,7 @@ class SoftErosion(nn.Module):
         self.threshold = threshold
 
         # Create kernel
-        y_indices, x_indices = torch.meshgrid(torch.arange(0., kernel_size), torch.arange(0., kernel_size))
+        y_indices, x_indices = torch.meshgrid(torch.arange(0., kernel_size), torch.arange(0., kernel_size), indexing='ij')
         dist = torch.sqrt((x_indices - r) ** 2 + (y_indices - r) ** 2)
         kernel = dist.max() - dist
         kernel /= kernel.sum()

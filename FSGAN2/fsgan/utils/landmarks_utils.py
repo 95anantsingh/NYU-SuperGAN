@@ -125,7 +125,7 @@ class LandmarksHeatMapEncoder(nn.Module):
         super(LandmarksHeatMapEncoder, self).__init__()
         assert isinstance(size, int) or (isinstance(size, Iterable) and len(size) == 2)
         size = (size, size) if isinstance(size, int) else size
-        y_indices, x_indices = torch.meshgrid(torch.arange(0., size[1]), torch.arange(0., size[0]))
+        y_indices, x_indices = torch.meshgrid(torch.arange(0., size[1]), torch.arange(0., size[0]), indexing='ij')
         self.register_buffer('x_indices', x_indices.add(0.5) / size[1])
         self.register_buffer('y_indices', y_indices.add(0.5) / size[0])
 
@@ -163,7 +163,7 @@ class LandmarksHeatMapDecoder(nn.Module):
         self.threshold = threshold
         self.max_dist = np.sqrt(2)
 
-        y_indices, x_indices = torch.meshgrid(torch.arange(0., self.size[1]), torch.arange(0., self.size[0]))
+        y_indices, x_indices = torch.meshgrid(torch.arange(0., self.size[1]), torch.arange(0., self.size[0]), indexing='ij')
         self.register_buffer('x_indices', x_indices.add(0.5) / self.size[1])
         self.register_buffer('y_indices', y_indices.add(0.5) / self.size[0])
 

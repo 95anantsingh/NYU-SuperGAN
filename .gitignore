@@ -105,4 +105,6 @@ gpus.py
 *.sbatch
 
 # Ignore inputs
-input
+input/
+output/
+data/

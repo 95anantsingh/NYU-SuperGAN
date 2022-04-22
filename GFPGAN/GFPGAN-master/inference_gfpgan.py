@@ -8,6 +8,8 @@ from basicsr.utils import imwrite
 
 from gfpgan import GFPGANer
 
+os.system('export BASICSR_JIT="True"')
+
 
 def main():
     """Inference demo for GFPGAN (for users).
@@ -116,7 +118,7 @@ def main():
         input_img = cv2.imread(img_path, cv2.IMREAD_COLOR)
 
         # restore faces and background if necessary
-        cropped_faces, restored_faces, restored_img = restorer.enhance(
+        cropped_faces, restored_faces, restored_img = restorer.enhance( \
             input_img, has_aligned=args.aligned, only_center_face=args.only_center_face, paste_back=True)
 
         # save faces

@@ -97,6 +97,7 @@ def main(input_path, output_path=None, cache_path=None, iou_thresh=0.75, min_len
             seq.finalize()
 
     # Write final sequence list to file
+    
     if len(seq_list) > 0 or write_empty:
         with open(output_path, "wb") as fp:  # Pickling
             pickle.dump(seq_list, fp)

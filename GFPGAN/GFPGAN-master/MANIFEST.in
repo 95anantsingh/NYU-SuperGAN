@@ -1,8 +1,0 @@
-include assets/*
-include inputs/*
-include scripts/*.py
-include inference_gfpgan.py
-include VERSION
-include LICENSE
-include requirements.txt
-include gfpgan/weights/README.md

@@ -34,7 +34,7 @@ class GaussianSmoothing(nn.Module):
             [
                 torch.arange(size, dtype=torch.float32)
                 for size in kernel_size
-            ]
+            ], indexing='ij'
         )
         for size, std, mgrid in zip(kernel_size, sigma, meshgrids):
             mean = (size - 1) / 2

@@ -10,3 +10,5 @@ lmdb
 pyyaml
 tb-nightly
 yapf
+realesrgan
+ninja

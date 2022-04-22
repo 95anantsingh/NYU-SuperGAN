@@ -17,7 +17,7 @@ def extractImages(pathIn, pathOut):
 
 if __name__=="__main__":
     a = ArgumentParser()
-    a.add_argument("-i,","--pathIn", default="./FSGAN2/output/output.mp4",help="path to video")
-    a.add_argument("-o","--pathOut", default="./FSGAN2/output/frames/", help="path to images")
+    a.add_argument("-i,","--pathIn", default="./FSGAN2/output/output2.mp4",help="path to video")
+    a.add_argument("-o","--pathOut", default="./FSGAN2/output/output2/", help="path to images")
     args = a.parse_args()
     extractImages(args.pathIn, args.pathOut)

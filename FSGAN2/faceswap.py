@@ -43,6 +43,14 @@ seg_batch_size = 64
 batch_size = 8
 
 
+# /home/as14229/NYU_HPC/GitHub/NYU-SuperGAN/FSGAN2/face_detection_dsfd/face_ssd_infer.py:239: 
+# UserWarning: An output with one or more elements was resized since it had shape [107], which 
+# does not match the required output shape [98].This behavior is deprecated, and in a future 
+# PyTorch release outputs will not be resized unless they have zero elements. 
+# You can explicitly reuse an out tensor t by resizing it, inplace, to zero elements with t.resize_(0). 
+# (Triggered internally at  /opt/conda/conda-bld/pytorch_1640811803361/work/aten/src/ATen/native/Resize.cpp:23.)
+# torch.index_select(y2, 0, idx, out=yy2)
+
 detection_model = os.path.join(weights_dir, 'v2/WIDERFace_DSFD_RES152.pth')
 pose_model = os.path.join(weights_dir, 'shared/hopenet_robust_alpha1.pth')
 lms_model = os.path.join(weights_dir, 'v2/hr18_wflw_landmarks.pth')
@@ -69,19 +77,19 @@ face_swapping = FaceSwapping(
 finetune = True
 
 # Source path
-source_path = './fsgan/docs/examples/shinzo_abe.mp4'
+source_path = '../data/input/elon_musk.mp4'
 
 # Source selection method ["longest" | sequence number]:
-select_source = 'longest'
+select_source = "11"
 
 # Target path
-target_path = './fsgan/docs/examples/conan_obrien.mp4'
+target_path = '../data/input/conan_obrien.mp4'
 
 # Target selection method
 select_target = 'longest'
 
 output_tmp_path = './output/output_tmp.mp4'
-output_path = './output/output.mp4'
+output_path = './output/output3.mp4'
 
 face_swapping(source_path, target_path, output_tmp_path,
               select_source, select_target, finetune)
