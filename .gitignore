@@ -108,3 +108,6 @@ gpus.py
 input/
 output/
 data/
+
+# DO not ignore vscode setup
+!.vscode/

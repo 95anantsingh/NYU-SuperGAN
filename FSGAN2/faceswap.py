@@ -27,9 +27,6 @@ def display_video(video_path, width=640, clear=True):
   return html
 
 
-# Path to the weights directory (make sure it is correct):
-weights_dir = './weights'
-
 # Number of finetune iterations on the source subject: min:100, max:2000, step:1
 finetune_iterations = 1000
 
@@ -53,8 +50,10 @@ batch_size = 8
 
 data_dir = "/home/as14229/Shared/SuperGAN/data/"
 
+# Path to the weights directory (make sure it is correct):
+weights_dir = data_dir + '/weights'
 
-detection_model = os.path.join(weights_dir, 'v2/WIDERFace_DSFD_RES152.pth')
+detection_model = os.path.join(weights_dir,'v2/WIDERFace_DSFD_RES152.pth')
 pose_model = os.path.join(weights_dir, 'shared/hopenet_robust_alpha1.pth')
 lms_model = os.path.join(weights_dir, 'v2/hr18_wflw_landmarks.pth')
 seg_model = os.path.join(weights_dir, 'v2/celeba_unet_256_1_2_segmentation_v2.pth')
@@ -80,19 +79,20 @@ face_swapping = FaceSwapping(
 finetune = True
 
 # Source path
-source_path = '../data/input/elon_musk.mp4'
+source_path = data_dir + 'inputs/elon_musk.mp4'
 
 # Source selection method ["longest" | sequence number]:
 select_source = "11"
 
 # Target path
-target_path = '../data/input/conan_obrien.mp4'
+target_path = data_dir + 'inputs/conan_obrien.mp4'
 
 # Target selection method
 select_target = 'longest'
 
-output_tmp_path = './output/output_tmp.mp4'
-output_path = './output/output3.mp4'
+# Outputs
+output_tmp_path = data_dir + 'fsgan_outputs/output_tmp.mp4'
+output_path = data_dir + 'fsgan_outputs/output3.mp4'
 
 face_swapping(source_path, target_path, output_tmp_path,
               select_source, select_target, finetune)

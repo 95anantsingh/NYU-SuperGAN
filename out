@@ -1,0 +1,2 @@
+SuperGAN_DATA='cd /home/as14229/Shared/SuperGAN/data/'
+alias GAN='conda activate GAN'
