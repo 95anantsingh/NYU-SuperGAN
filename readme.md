@@ -10,6 +10,7 @@
 1. Run - `git clone `
 2. Run - `python setup.py` only once.
 3. Run - `GAN ` to activate shared environment afterwards whenever required.
+4. Run - `SuperGAN_DATA` for switching to data directory whenever required.
 
 <br><br>
 
