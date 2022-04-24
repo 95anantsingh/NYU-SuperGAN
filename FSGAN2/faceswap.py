@@ -51,6 +51,9 @@ batch_size = 8
 # (Triggered internally at  /opt/conda/conda-bld/pytorch_1640811803361/work/aten/src/ATen/native/Resize.cpp:23.)
 # torch.index_select(y2, 0, idx, out=yy2)
 
+data_dir = "/home/as14229/Shared/SuperGAN/data/"
+
+
 detection_model = os.path.join(weights_dir, 'v2/WIDERFace_DSFD_RES152.pth')
 pose_model = os.path.join(weights_dir, 'shared/hopenet_robust_alpha1.pth')
 lms_model = os.path.join(weights_dir, 'v2/hr18_wflw_landmarks.pth')
