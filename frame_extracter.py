@@ -1,4 +1,5 @@
 import cv2
+from os.path import exists
 from argparse import ArgumentParser
 
 def extractImages(pathIn, pathOut):
@@ -8,8 +9,11 @@ def extractImages(pathIn, pathOut):
     print('\nExtracting')
     count = 0
     success = True
+    if not exists(pathIn):
+        print("Input path does not exists")
+        exit()
     while success:
-        cv2.imwrite(pathOut+"frame%d.jpg" % count, image)     # save frame as JPEG file      
+        cv2.imwrite(pathOut+"frame%d.jpg" % count, image)     
         success,image = vidcap.read()
         count += 1
     print('Done..\n')

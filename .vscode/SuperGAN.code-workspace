@@ -5,6 +5,12 @@
         },
         {
             "path": "/home/as14229/Shared/SuperGAN/data"
+
         }
-    ]
+
+    ],
+    "extensions": {"recommendations": ["analytic-signal.preview-mp4","eamodio.gitlens"]},
+    "settings": {
+        "python.defaultInterpreterPath": "/scratch/as14229/envs_dir/GAN/bin/python"
+    }
 }
