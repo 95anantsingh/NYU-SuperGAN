@@ -7,7 +7,7 @@ from torch.autograd import Variable
 from ..box_utils import refine_match, pa_sfd_match, sfd_match, match, log_sum_exp
 import pdb
 
-from face_detection_dsfd.data import  widerface_640
+from fsgan.dependency.data import  widerface_640
 cfg = widerface_640
 pa = cfg['progressive_anchor']
 ac = cfg['anchor_compensation']

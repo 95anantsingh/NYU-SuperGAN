@@ -7,9 +7,9 @@ import cv2
 import torch
 import torch.nn as nn
 # from face_ssd import build_ssd
-from face_detection_dsfd.face_ssd_infer import SSD
-from face_detection_dsfd.data import widerface_640, TestBaseTransform
-from face_detection_dsfd.layers.functions.detection import Detect
+from fsgan.dependency.face_ssd_infer import SSD
+from fsgan.dependency.data import widerface_640, TestBaseTransform
+from fsgan.dependency.layers.functions.detection import Detect
 
 
 class FaceDetector(object):

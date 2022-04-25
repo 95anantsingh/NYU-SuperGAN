@@ -1,8 +1,8 @@
 from __future__ import division
 import torch
 from torch.autograd import Function
-from ..box_utils import decode, nms, center_size
-from face_detection_dsfd.data import widerface_640 as cfg
+from fsgan.dependency.layers import decode, nms, center_size
+from fsgan.dependency.data import widerface_640 as cfg
 import pdb
 
 class Detect(Function):

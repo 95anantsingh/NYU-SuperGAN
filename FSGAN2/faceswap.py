@@ -54,7 +54,7 @@ face_swapping = FaceSwapping(
 finetune = True
 
 # Source path
-source_path = data_dir + 'inputs/elon_musk.mp4'
+source_path = data_dir + 'inputs/shinzo_abe.mp4'
 
 # Source selection method ["longest" | sequence number]:
 select_source = "longest"
@@ -67,7 +67,7 @@ select_target = 'longest'
 
 # Outputs
 output_tmp_path = data_dir + 'fsgan_outputs/output_tmp.mp4'
-output_path = data_dir + 'fsgan_outputs/output3.mp4'
+output_path = data_dir + 'fsgan_outputs/outputzz.mp4'
 
 face_swapping(source_path, target_path, output_tmp_path,
               select_source, select_target, finetune)
