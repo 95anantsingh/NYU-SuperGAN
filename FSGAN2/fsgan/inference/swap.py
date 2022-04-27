@@ -15,12 +15,15 @@ sys.path.append(os.path.dirname(os.path.dirname(os.getcwd())))
 
 import argparse
 
-import pickle
-import matplotlib.pyplot as plt
-from tqdm import tqdm
-import numpy as np
+
 import cv2
 import torch
+import pickle
+import numpy as np
+from tqdm import tqdm
+import matplotlib.pyplot as plt
+
+
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
@@ -111,6 +114,8 @@ class FaceSwapping(VideoProcessBase):
         batch_size=d('batch_size'), reenactment_model=d('reenactment_model'), completion_model=d('completion_model'),
         blending_model=d('blending_model'), criterion_id=d('criterion_id'), min_radius=d('min_radius'),
         output_crop=d('output_crop'), renderer_process=d('renderer_process')):
+
+        # PreProcess Video
         super(FaceSwapping, self).__init__(
             resolution, crop_scale, gpus, cpu_only, display, verbose, encoder_codec,
             detection_model=detection_model, det_batch_size=det_batch_size, det_postfix=det_postfix,
@@ -122,6 +127,8 @@ class FaceSwapping(VideoProcessBase):
             cache_landmarks=True, smooth_landmarks=smooth_landmarks, seg_model=seg_model,
             seg_batch_size=seg_batch_size, segmentation_postfix=segmentation_postfix,
             cache_segmentation=True, smooth_segmentation=smooth_segmentation, seg_remove_mouth=seg_remove_mouth)
+
+        # Set arguments    
         self.batch_size = batch_size
         self.min_radius = min_radius
         self.output_crop = output_crop
@@ -501,6 +508,7 @@ def main(source, target, output=None, select_source=d('select_source'), select_t
         face_swapping(source[0], target[0], output, select_source, select_target)
     else:
         batch(source, target, output, face_swapping, postfix='.mp4', skip_existing=True)
+
 
 
 if __name__ == "__main__":

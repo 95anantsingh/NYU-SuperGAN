@@ -107,7 +107,6 @@ gpus.py
 # Ignore inputs
 input/
 output/
-data/
 
 # DO not ignore vscode setup
 !.vscode/
