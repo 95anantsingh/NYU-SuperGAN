@@ -292,7 +292,8 @@ class FaceSwapping(VideoProcessBase):
         print(f'=> Face swapping: "{src_vid_seq_name}" -> "{tgt_vid_seq_name}"...')
 
         #>>>Edits
-        data_dir = '/home/as14229/Shared/SuperGAN/data/fsgan_test'
+        data_dir = '/home/as14229/Shared/SuperGAN/data/fsgan_test/'
+        image_stages = {}
 
         #>>>Edits end
 
@@ -309,6 +310,13 @@ class FaceSwapping(VideoProcessBase):
             bw = bw.to(self.device)
             bw_indices = torch.nonzero(torch.any(bw > 0, dim=0), as_tuple=True)[0]
             bw = bw[:, bw_indices]
+
+            #>>> Edits
+            image_stages["src_frame"] = src_frame[0]
+            image_stages["target_frame"] = tgt_frame[0]
+
+            #>>> Edits end
+            
 
             # For each source frame perform reenactment
             reenactment_triplet = []
@@ -329,12 +337,18 @@ class FaceSwapping(VideoProcessBase):
             reenactment_seg = self.S(reenactment_tensor)
             reenactment_background_mask_tensor = (reenactment_seg.argmax(1) != 1).unsqueeze(1)
 
+            #>>> Edits
+            image_stages["r1"] = reenactment_tensor[0]
+            image_stages["r_bg_mask"] = reenactment_background_mask_tensor[0]
+
+            #>>> Edits end
+
             # Remove the background of the aligned face
             reenactment_tensor.masked_fill_(reenactment_background_mask_tensor, -1.0)
 
             #>>> Edits
 
-            torch.save(reenactment_tensor[0], data_dir +"reenactment.pth")
+            image_stages["r_final"] = reenactment_tensor[0]
 
             #>>> Edits end
 
@@ -347,8 +361,9 @@ class FaceSwapping(VideoProcessBase):
             completion_tensor = self.Gc(inpainting_input_tensor_pyd)
 
             #>>> Edits
-
-            torch.save(completion_tensor[0], data_dir +"completion.pth")
+            image_stages["inpainting"] = inpainting_input_tensor[0]
+            image_stages["inpainting_pyd"] = inpainting_input_tensor_pyd[0][0]
+            image_stages["completion"] = completion_tensor[0]
 
             #>>> Edits end
 
@@ -360,10 +375,10 @@ class FaceSwapping(VideoProcessBase):
             
 
             #>>> Edits
-
-            torch.save(blend_tensor[0], data_dir +"blend.pth")
-
-
+            image_stages["transfer"] = transfer_tensor[0]
+            # image_stages["blend_input"] = blend_input_tensor[0]
+            # image_stages["blend_input_pyd"] = blend_input_tensor_pyd[0][0]
+            image_stages["blend_final"] =  blend_tensor[0]
 
             #>>> Edits end
 
@@ -373,8 +388,8 @@ class FaceSwapping(VideoProcessBase):
             result_tensor = blend_tensor * soft_tgt_mask + tgt_frame * (1 - soft_tgt_mask)
 
             #>>> Edits
-
-            torch.save(result_tensor[0], data_dir +"result.pth")
+            image_stages["result"] = result_tensor[0]
+            torch.save(image_stages, data_dir + 'fsgan_image_stages.pth')
             exit()
 
             #>>> Edits end
