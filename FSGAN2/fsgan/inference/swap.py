@@ -291,6 +291,11 @@ class FaceSwapping(VideoProcessBase):
 
         print(f'=> Face swapping: "{src_vid_seq_name}" -> "{tgt_vid_seq_name}"...')
 
+        #>>>Edits
+        data_dir = '/home/as14229/Shared/SuperGAN/data/fsgan_test'
+
+        #>>>Edits end
+
         # For each batch of frames in the target video
         for i, (src_frame, src_landmarks, src_poses, bw, tgt_frame, tgt_landmarks, tgt_pose, tgt_mask) \
                 in enumerate(tqdm(appearance_map_loader, unit='batches', file=sys.stdout)):
@@ -327,6 +332,12 @@ class FaceSwapping(VideoProcessBase):
             # Remove the background of the aligned face
             reenactment_tensor.masked_fill_(reenactment_background_mask_tensor, -1.0)
 
+            #>>> Edits
+
+            torch.save(reenactment_tensor[0], data_dir +"reenactment.pth")
+
+            #>>> Edits end
+
             # Soften target mask
             soft_tgt_mask, eroded_tgt_mask = self.smooth_mask(tgt_mask)
 
@@ -334,6 +345,12 @@ class FaceSwapping(VideoProcessBase):
             inpainting_input_tensor = torch.cat((reenactment_tensor, eroded_tgt_mask.float()), dim=1)
             inpainting_input_tensor_pyd = create_pyramid(inpainting_input_tensor, 2)
             completion_tensor = self.Gc(inpainting_input_tensor_pyd)
+
+            #>>> Edits
+
+            torch.save(completion_tensor[0], data_dir +"completion.pth")
+
+            #>>> Edits end
 
             # Blend faces
             transfer_tensor = transfer_mask(completion_tensor, tgt_frame, eroded_tgt_mask)
@@ -344,14 +361,8 @@ class FaceSwapping(VideoProcessBase):
 
             #>>> Edits
 
-            print("Blend Tensor: ", blend_tensor)
+            torch.save(blend_tensor[0], data_dir +"blend.pth")
 
-            print("Blend Tensor Shape: ", blend_tensor.shape)
-
-            data_dir = "/home/as14229/Shared/SuperGAN/data/"
-            torch.save(blend_tensor, data_dir +"blend.pth")
-
-            exit()
 
 
             #>>> Edits end
@@ -361,7 +372,12 @@ class FaceSwapping(VideoProcessBase):
             # Final result
             result_tensor = blend_tensor * soft_tgt_mask + tgt_frame * (1 - soft_tgt_mask)
 
+            #>>> Edits
 
+            torch.save(result_tensor[0], data_dir +"result.pth")
+            exit()
+
+            #>>> Edits end
 
 
             # Write output
