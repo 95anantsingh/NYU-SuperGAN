@@ -341,8 +341,15 @@ class FaceSwapping(VideoProcessBase):
             blend_input_tensor_pyd = create_pyramid(blend_input_tensor, 2)
             blend_tensor = self.Gb(blend_input_tensor_pyd)
 
+
+
+            
+
             # Final result
             result_tensor = blend_tensor * soft_tgt_mask + tgt_frame * (1 - soft_tgt_mask)
+
+
+
 
             # Write output
             if self.verbose == 0:

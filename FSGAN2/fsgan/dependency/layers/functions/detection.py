@@ -2,7 +2,7 @@ from __future__ import division
 import torch
 from torch.autograd import Function
 from ..box_utils import decode, nms, center_size
-from fsgan.dependency.data import widerface_640 as cfg
+from fsgan.dependency.data.config import widerface_640 as cfg
 
 class Detect(Function):
     """At test time, Detect is the final layer of SSD.  Decode location preds,
