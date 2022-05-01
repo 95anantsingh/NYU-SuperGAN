@@ -8,7 +8,7 @@ from numpy import random
 import random as random_random
 import pdb
 import math
-from data.config import widerface_640
+from fsgan.dependency.data import widerface_640
 
 cfg = widerface_640
 das = cfg['data_anchor_sampling']
