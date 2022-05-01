@@ -340,6 +340,11 @@ class FaceSwapping(VideoProcessBase):
             blend_input_tensor = torch.cat((transfer_tensor, tgt_frame, eroded_tgt_mask.float()), dim=1)
             blend_input_tensor_pyd = create_pyramid(blend_input_tensor, 2)
             blend_tensor = self.Gb(blend_input_tensor_pyd)
+            
+            print("Blend Tensor: ", blend_tensor)
+            print("Blend Tensor Shape: ", blend_tensor.shape)
+            # TODO
+            # Face Restoration Generator
 
             # Final result
             result_tensor = blend_tensor * soft_tgt_mask + tgt_frame * (1 - soft_tgt_mask)

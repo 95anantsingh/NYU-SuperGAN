@@ -38,7 +38,7 @@ blending_model = os.path.join(weights_dir, 'v2/ijbc_msrunet_256_1_2_blending_v2.
 criterion_id_path = os.path.join(weights_dir, 'v2/vggface2_vgg19_256_1_2_id.pth')
 criterion_id = VGGLoss(criterion_id_path)
 
-# Initial Swaping object
+# Initial Swapping object
 face_swapping = FaceSwapping(
     detection_model=detection_model, pose_model=pose_model, lms_model=lms_model,
     seg_model=seg_model, reenactment_model=reenactment_model,
