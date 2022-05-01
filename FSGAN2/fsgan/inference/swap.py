@@ -346,8 +346,15 @@ class FaceSwapping(VideoProcessBase):
             # TODO
             # Face Restoration Generator
 
+
+
+            
+
             # Final result
             result_tensor = blend_tensor * soft_tgt_mask + tgt_frame * (1 - soft_tgt_mask)
+
+
+
 
             # Write output
             if self.verbose == 0:

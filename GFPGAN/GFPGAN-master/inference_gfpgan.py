@@ -70,7 +70,7 @@ def main():
             model = RRDBNet(num_in_ch=3, num_out_ch=3, num_feat=64, num_block=23, num_grow_ch=32, scale=2)
             bg_upsampler = RealESRGANer(
                 scale=2,
-                model_path='https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.1/RealESRGAN_x2plus.pth',
+                model_path='https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.1/RealESRGAN_x2plus.pth', #> Where are these stored
                 model=model,
                 tile=args.bg_tile,
                 tile_pad=10,
@@ -118,7 +118,7 @@ def main():
         input_img = cv2.imread(img_path, cv2.IMREAD_COLOR)
 
         # restore faces and background if necessary
-        cropped_faces, restored_faces, restored_img = restorer.enhance( \
+        cropped_faces, restored_faces, restored_img = restorer.enhance(
             input_img, has_aligned=args.aligned, only_center_face=args.only_center_face, paste_back=True)
 
         # save faces
