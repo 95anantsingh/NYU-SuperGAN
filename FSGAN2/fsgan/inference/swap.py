@@ -341,15 +341,23 @@ class FaceSwapping(VideoProcessBase):
             blend_input_tensor_pyd = create_pyramid(blend_input_tensor, 2)
             blend_tensor = self.Gb(blend_input_tensor_pyd)
             
+
+            #>>> Edits
+
             print("Blend Tensor: ", blend_tensor)
+
             print("Blend Tensor Shape: ", blend_tensor.shape)
+
+            data_dir = "/home/as14229/Shared/SuperGAN/data/"
+            torch.save(blend_tensor, data_dir +"blend.pth")
+
+            exit()
+
+
+            #>>> Edits end
+
             # TODO
             # Face Restoration Generator
-
-
-
-            
-
             # Final result
             result_tensor = blend_tensor * soft_tgt_mask + tgt_frame * (1 - soft_tgt_mask)
 
