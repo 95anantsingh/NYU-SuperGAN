@@ -312,9 +312,9 @@ class FaceSwapping(VideoProcessBase):
             bw = bw[:, bw_indices]
 
             #>>> Edits
-            image_stages["src_frame"] = src_frame[0]
+            image_stages["src_frame"] = src_frame[0][0][0]
             image_stages["target_frame"] = tgt_frame[0]
-
+            
             #>>> Edits end
             
 
@@ -338,7 +338,7 @@ class FaceSwapping(VideoProcessBase):
             reenactment_background_mask_tensor = (reenactment_seg.argmax(1) != 1).unsqueeze(1)
 
             #>>> Edits
-            image_stages["r1"] = reenactment_tensor[0]
+            # image_stages["r1"] = reenactment_tensor[0]
             image_stages["r_bg_mask"] = reenactment_background_mask_tensor[0]
 
             #>>> Edits end
@@ -348,7 +348,7 @@ class FaceSwapping(VideoProcessBase):
 
             #>>> Edits
 
-            image_stages["r_final"] = reenactment_tensor[0]
+            image_stages["reenactment"] = reenactment_tensor[0]
 
             #>>> Edits end
 
@@ -362,7 +362,7 @@ class FaceSwapping(VideoProcessBase):
 
             #>>> Edits
             image_stages["inpainting"] = inpainting_input_tensor[0]
-            image_stages["inpainting_pyd"] = inpainting_input_tensor_pyd[0][0]
+            # image_stages["inpainting_pyd"] = inpainting_input_tensor_pyd[0][0]
             image_stages["completion"] = completion_tensor[0]
 
             #>>> Edits end
