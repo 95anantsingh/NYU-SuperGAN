@@ -12,6 +12,7 @@ os.system('export BASICSR_JIT="True"')
 
 
 def main():
+    data_dir = "/home/as14229/Shared/SuperGAN/data/"
     """Inference demo for GFPGAN (for users).
     """
     parser = argparse.ArgumentParser()
@@ -19,12 +20,17 @@ def main():
         '-i',
         '--input',
         type=str,
-        default='inputs/whole_imgs',
+        default=os.path.join(data_dir + 'fsgan_outputs/output2'),
         help='Input image or folder. Default: inputs/whole_imgs')
-    parser.add_argument('-o', '--output', type=str, default='results', help='Output folder. Default: results')
+    parser.add_argument(
+        '-o', 
+        '--output', 
+        type=str, 
+        default=os.path.join(data_dir + 'gfpgan_output'), 
+        help='Output folder. Default: results')
     # we use version to select models, which is more user-friendly
     parser.add_argument(
-        '-v', '--version', type=str, default='1.3', help='GFPGAN model version. Option: 1 | 1.2 | 1.3. Default: 1.3')
+        '-v', '--version', type=str, default='1.2', help='GFPGAN model version. Option: 1 | 1.2 | 1.3. Default: 1.3')
     parser.add_argument(
         '-s', '--upscale', type=int, default=2, help='The final upsampling scale of the image. Default: 2')
 
@@ -95,11 +101,18 @@ def main():
     else:
         raise ValueError(f'Wrong model version {args.version}.')
 
+    data_dir = "/home/as14229/Shared/SuperGAN/data/"
+    image_stages = {}
+
+    # Path to the weights directory (make sure it is correct):
+    weights_dir = data_dir + 'weights'
+
     # determine model paths
-    model_path = os.path.join('experiments/pretrained_models', model_name + '.pth')
+    model_path = os.path.join(weights_dir, model_name + '.pth')
+    # if not os.path.isfile(model_path):
+    #     model_path = os.path.join('realesrgan/weights', model_name + '.pth')
     if not os.path.isfile(model_path):
-        model_path = os.path.join('realesrgan/weights', model_name + '.pth')
-    if not os.path.isfile(model_path):
+        print(model_path)
         raise ValueError(f'Model {model_name} does not exist.')
 
     restorer = GFPGANer(

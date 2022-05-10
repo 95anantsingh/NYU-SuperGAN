@@ -97,6 +97,15 @@ class GFPGANer():
     def enhance(self, img, has_aligned=False, only_center_face=False, paste_back=True):
         self.face_helper.clean_all()
 
+        #>>>Edits
+        data_dir = '/home/as14229/Shared/SuperGAN/data/gfpgan_test/'
+        image_stages = {}
+        #>>>Edits end
+
+        #>>> Edits
+        image_stages["input"] = img            
+        #>>> Edits end
+        
         if has_aligned:  # the inputs are already aligned
             img = cv2.resize(img, (512, 512))
             self.face_helper.cropped_faces = [img]
@@ -116,8 +125,15 @@ class GFPGANer():
             normalize(cropped_face_t, (0.5, 0.5, 0.5), (0.5, 0.5, 0.5), inplace=True)
             cropped_face_t = cropped_face_t.unsqueeze(0).to(self.device)
 
+            #>>> Edits
+            image_stages["cropped_face"] = cropped_face_t[0]           
+            #>>> Edits end
+
             try:
                 output = self.gfpgan(cropped_face_t, return_rgb=False)[0]
+                #>>> Edits
+                image_stages["output"] = output[0]    
+                #>>> Edits end
                 # convert to image
                 restored_face = tensor2img(output.squeeze(0), rgb2bgr=True, min_max=(-1, 1))
             except RuntimeError as error:
@@ -126,6 +142,10 @@ class GFPGANer():
 
             restored_face = restored_face.astype('uint8')
             self.face_helper.add_restored_face(restored_face)
+        
+        #>>> Edits
+        torch.save(image_stages, data_dir + 'gfpgan_image_stages.pth')        
+        #>>> Edits end
 
         if not has_aligned and paste_back:
             # upsample the background
