@@ -1,5 +1,7 @@
+from tkinter import Image
 import cv2
 import os
+from cv2 import imshow
 import torch
 from basicsr.utils import img2tensor, tensor2img
 from basicsr.utils.download_util import load_file_from_url
@@ -9,6 +11,9 @@ from torchvision.transforms.functional import normalize
 from gfpgan.archs.gfpgan_bilinear_arch import GFPGANBilinear
 from gfpgan.archs.gfpganv1_arch import GFPGANv1
 from gfpgan.archs.gfpganv1_clean_arch import GFPGANv1Clean
+
+import numpy as np
+import matplotlib.pyplot as plt
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -81,9 +86,6 @@ class GFPGANer():
             save_ext='png',
             device=self.device)
 
-        if model_path.startswith('https://'):
-            model_path = load_file_from_url(
-                url=model_path, model_dir=os.path.join(ROOT_DIR, 'gfpgan/weights'), progress=True, file_name=None)
         loadnet = torch.load(model_path)
         if 'params_ema' in loadnet:
             keyname = 'params_ema'
@@ -96,6 +98,9 @@ class GFPGANer():
     @torch.no_grad()
     def enhance(self, img, has_aligned=False, only_center_face=False, paste_back=True):
         self.face_helper.clean_all()
+
+        img = np.transpose(img.cpu().detach().numpy(), (1, 2, 0))
+        # img = cv2.cvtColor(img, cv2.IMREAD_COLOR)
 
         #>>>Edits
         data_dir = '/home/as14229/Shared/SuperGAN/data/gfpgan_test/'
@@ -130,7 +135,7 @@ class GFPGANer():
             #>>> Edits end
 
             try:
-                output = self.gfpgan(cropped_face_t, return_rgb=False)[0]
+                output = self.gfpgan(cropped_face_t, return_rgb=True)[0]
                 #>>> Edits
                 image_stages["output"] = output[0]    
                 #>>> Edits end

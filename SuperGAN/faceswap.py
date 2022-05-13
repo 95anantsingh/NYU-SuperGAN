@@ -69,9 +69,41 @@ select_target = 'longest'
 output_tmp_path = data_dir + 'fsgan_outputs/output_tmp.mp4'
 output_path = data_dir + 'fsgan_outputs/outputzz.mp4'
 
+# Select upscale value for GFPGAN
+upscale = 2
+
 face_swapping(source_path, target_path, output_tmp_path,
-              select_source, select_target, finetune)
+              select_source, select_target, finetune, upscale)
 
 # Encode with audio and save result
 encode_audio(output_tmp_path, target_path, output_path)
 os.remove(output_tmp_path)
+
+
+# numpy  {1.21.2 (defaults/linux-64) -> 1.20.3 (conda-forge/linux-64)}
+#     -numpy-base-1.21.2 (defaults/linux-64)
+#     +attrs-21.4.0 (conda-forge/noarch)
+#     +bleach-5.0.0 (conda-forge/noarch)
+#     +defusedxml-0.7.1 (conda-forge/noarch)
+#     +importlib-metadata-4.11.3 (conda-forge/linux-64)
+#     +importlib_resources-5.7.1 (conda-forge/noarch)
+#     +ipython_genutils-0.2.0 (conda-forge/noarch)
+#     +ipywidgets-7.7.0 (conda-forge/noarch)
+#     +jinja2-3.1.1 (conda-forge/noarch)
+#     +jsonschema-4.4.0 (conda-forge/noarch)
+#     +jupyterlab_widgets-1.1.0 (conda-forge/noarch)
+#     +markupsafe-2.0.1 (conda-forge/linux-64)
+#     +mistune-0.8.4 (conda-forge/linux-64)
+#     +nbconvert-5.6.1 (conda-forge/noarch)
+#     +nbformat-5.3.0 (conda-forge/noarch)
+#     +notebook-5.7.11 (conda-forge/linux-64)
+#     +pandocfilters-1.5.0 (conda-forge/noarch)
+#     +prometheus_client-0.14.1 (conda-forge/noarch)
+#     +pyrsistent-0.18.0 (defaults/linux-64)
+#     +python-fastjsonschema-2.15.3 (conda-forge/noarch)
+#     +send2trash-1.8.0 (conda-forge/noarch)
+#     +terminado-0.13.3 (conda-forge/linux-64)
+#     +testpath-0.6.0 (conda-forge/noarch)
+#     +webencodings-0.5.1 (conda-forge/noarch)
+#     +widgetsnbextension-3.6.0 (conda-forge/linux-64)
+#     +zipp-3.8.0 (conda-forge/noarch)

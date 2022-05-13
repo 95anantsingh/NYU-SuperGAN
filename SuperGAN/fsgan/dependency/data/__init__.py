@@ -1,6 +1,6 @@
 from __future__ import division , print_function
 
-from .config import *
+from fsgan.dependency.data.config import *
 import torch
 import cv2
 import numpy as np
