@@ -98,9 +98,7 @@ class GFPGANer():
     @torch.no_grad()
     def enhance(self, img, has_aligned=False, only_center_face=False, paste_back=True):
         self.face_helper.clean_all()
-
-        img = np.transpose(img.cpu().detach().numpy(), (1, 2, 0))
-        # img = cv2.cvtColor(img, cv2.IMREAD_COLOR)
+        img = cv2.cvtColor(img, cv2.IMREAD_COLOR)
 
         #>>>Edits
         data_dir = '/home/as14229/Shared/SuperGAN/data/gfpgan_test/'
@@ -108,20 +106,23 @@ class GFPGANer():
         #>>>Edits end
 
         #>>> Edits
-        image_stages["input"] = img            
+        image_stages["input"] = img 
+        img = cv2.resize(img, (512, 512)) 
+        image_stages["Input_resize"] = img
+        self.face_helper.cropped_faces = [img]          
         #>>> Edits end
         
-        if has_aligned:  # the inputs are already aligned
-            img = cv2.resize(img, (512, 512))
-            self.face_helper.cropped_faces = [img]
-        else:
-            self.face_helper.read_image(img)
-            # get face landmarks for each face
-            self.face_helper.get_face_landmarks_5(only_center_face=only_center_face, eye_dist_threshold=5)
-            # eye_dist_threshold=5: skip faces whose eye distance is smaller than 5 pixels
-            # TODO: even with eye_dist_threshold, it will still introduce wrong detections and restorations.
-            # align and warp each face
-            self.face_helper.align_warp_face()
+        # if has_aligned:  # the inputs are already aligned
+        #     img = cv2.resize(img, (512, 512))
+        #     self.face_helper.cropped_faces = [img]
+        # else:
+        #     self.face_helper.read_image(img)
+        #     # get face landmarks for each face
+        #     self.face_helper.get_face_landmarks_5(only_center_face=only_center_face, eye_dist_threshold=5)
+        #     # eye_dist_threshold=5: skip faces whose eye distance is smaller than 5 pixels
+        #     # TODO: even with eye_dist_threshold, it will still introduce wrong detections and restorations.
+        #     # align and warp each face
+        #     self.face_helper.align_warp_face()
 
         # face restoration
         for cropped_face in self.face_helper.cropped_faces:
@@ -140,7 +141,7 @@ class GFPGANer():
                 image_stages["output"] = output[0]    
                 #>>> Edits end
                 # convert to image
-                restored_face = tensor2img(output.squeeze(0), rgb2bgr=True, min_max=(-1, 1))
+                restored_face = tensor2img(output.squeeze(0), rgb2bgr=True)
             except RuntimeError as error:
                 print(f'\tFailed inference for GFPGAN: {error}.')
                 restored_face = cropped_face

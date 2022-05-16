@@ -403,7 +403,7 @@ class FaceSwapping(VideoProcessBase):
             print("=> Starting GFPGAN restorer")
             arch = 'clean'
             channel_multiplier = 2
-            model_name = 'GFPGANv1.3'
+            model_name = 'GFPGANCleanv1-NoCE-C2'
 
             model_path = os.path.join(weights_dir, model_name + '.pth')
             if not os.path.isfile(model_path):
@@ -417,8 +417,7 @@ class FaceSwapping(VideoProcessBase):
                 channel_multiplier=channel_multiplier,
                 bg_upsampler=None)
 
-            gfp_input_img = result_tensor[0]
-            print(gfp_input_img.shape)
+            gfp_input_img = np.transpose(result_tensor[0].cpu().detach().numpy(), (1, 2, 0))
             cropped_face, restored_face, restored_img = restorer.enhance(
                 gfp_input_img, has_aligned=True, paste_back=True
             )
