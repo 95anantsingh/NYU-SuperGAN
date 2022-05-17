@@ -195,7 +195,7 @@ class LandmarksHeatMapDecoder(nn.Module):
 def encode_landmarks_98pts(context, resolution=256):
     for i in range(np.log2(context.shape[2]).astype(int) + 1, np.log2(resolution).astype(int) + 1):
         curr_res = np.power(2, i)
-        context = F.interpolate(context, size=(curr_res, curr_res), mode='bilinear', align_corners=False)
+        context = F.interpolate(context, size=(curr_res, curr_res), mode='bilinear', align_corners=False, recompute_scale_factor=False)
     out = torch.zeros(context.shape[0], 3, *context.shape[2:], dtype=context.dtype, device=context.device)
 
     # Jaw

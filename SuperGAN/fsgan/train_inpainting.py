@@ -79,20 +79,20 @@ def main(
                 # Compute segmentation
                 target_seg = S(img[1][0])
                 if target_seg.shape[2:] != (res, res):
-                    target_seg = F.interpolate(target_seg, (res, res), mode='bicubic', align_corners=False)
+                    target_seg = F.interpolate(target_seg, (res, res), mode='bicubic', align_corners=False, recompute_scale_factor=False)
 
                 # Concatenate pyramid images with context to derive the final input
                 input = []
                 for p in range(len(img[0]) - 1, -1, -1):
-                    context = F.interpolate(context, size=img[0][p].shape[2:], mode='bicubic', align_corners=False)
+                    context = F.interpolate(context, size=img[0][p].shape[2:], mode='bicubic', align_corners=False, recompute_scale_factor=False)
                     input.insert(0, torch.cat((img[0][p], context), dim=1))
 
                 # Reenactment
                 reenactment_img = Gr(input)
                 reenactment_seg = S(reenactment_img)
                 if reenactment_img.shape[2:] != (res, res):
-                    reenactment_img = F.interpolate(reenactment_img, (res, res), mode='bilinear', align_corners=False)
-                    reenactment_seg = F.interpolate(reenactment_seg, (res, res), mode='bilinear', align_corners=False)
+                    reenactment_img = F.interpolate(reenactment_img, (res, res), mode='bilinear', align_corners=False, recompute_scale_factor=False)
+                    reenactment_seg = F.interpolate(reenactment_seg, (res, res), mode='bilinear', align_corners=False, recompute_scale_factor=False)
 
                 # Remove unnecessary pyramids
                 for j in range(len(img)):

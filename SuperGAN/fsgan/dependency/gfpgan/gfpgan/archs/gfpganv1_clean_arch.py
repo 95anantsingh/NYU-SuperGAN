@@ -140,10 +140,10 @@ class ResBlock(nn.Module):
     def forward(self, x):
         out = F.leaky_relu_(self.conv1(x), negative_slope=0.2)
         # upsample/downsample
-        out = F.interpolate(out, scale_factor=self.scale_factor, mode='bilinear', align_corners=False)
+        out = F.interpolate(out, scale_factor=self.scale_factor, mode='bilinear', align_corners=False,recompute_scale_factor=False)
         out = F.leaky_relu_(self.conv2(out), negative_slope=0.2)
         # skip
-        x = F.interpolate(x, scale_factor=self.scale_factor, mode='bilinear', align_corners=False)
+        x = F.interpolate(x, scale_factor=self.scale_factor, mode='bilinear', align_corners=False, recompute_scale_factor=False)
         skip = self.skip(x)
         out = out + skip
         return out

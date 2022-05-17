@@ -179,7 +179,7 @@ class ConvUpLayer(nn.Module):
 
     def forward(self, x):
         # bilinear upsample
-        out = F.interpolate(x, scale_factor=2, mode='bilinear', align_corners=False)
+        out = F.interpolate(x, scale_factor=2, mode='bilinear', align_corners=False, recompute_scale_factor=False)
         # conv
         out = F.conv2d(
             out,

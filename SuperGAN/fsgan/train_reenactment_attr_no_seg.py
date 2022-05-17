@@ -72,7 +72,7 @@ def main(
                 # Concatenate pyramid images with context to derive the final input
                 input = []
                 for p in range(len(img[0]) - 1, -1, -1):
-                    context = F.interpolate(context, size=img[0][p].shape[2:], mode='bicubic', align_corners=False)
+                    context = F.interpolate(context, size=img[0][p].shape[2:], mode='bicubic', align_corners=False, recompute_scale_factor=False)
                     input.append(torch.cat((img[0][p], context), dim=1))
                 input = input[::-1]
 

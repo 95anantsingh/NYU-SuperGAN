@@ -86,9 +86,9 @@ class ModulatedConv2d(nn.Module):
 
         # upsample or downsample if necessary
         if self.sample_mode == 'upsample':
-            x = F.interpolate(x, scale_factor=2, mode='bilinear', align_corners=False)
+            x = F.interpolate(x, scale_factor=2, mode='bilinear', align_corners=False, recompute_scale_factor=False)
         elif self.sample_mode == 'downsample':
-            x = F.interpolate(x, scale_factor=0.5, mode='bilinear', align_corners=False)
+            x = F.interpolate(x, scale_factor=0.5, mode='bilinear', align_corners=False, recompute_scale_factor=False)
 
         b, c, h, w = x.shape
         x = x.view(1, b * c, h, w)
@@ -169,7 +169,7 @@ class ToRGB(nn.Module):
         out = out + self.bias
         if skip is not None:
             if self.upsample:
-                skip = F.interpolate(skip, scale_factor=2, mode='bilinear', align_corners=False)
+                skip = F.interpolate(skip, scale_factor=2, mode='bilinear', align_corners=False, recompute_scale_factor=False)
             out = out + skip
         return out
 

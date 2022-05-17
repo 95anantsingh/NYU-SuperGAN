@@ -227,7 +227,7 @@ class GFPGANModel(BaseModel):
         pyramid_gt = [self.gt]
         down_img = self.gt
         for _ in range(0, self.log_size - 3):
-            down_img = F.interpolate(down_img, scale_factor=0.5, mode='bilinear', align_corners=False)
+            down_img = F.interpolate(down_img, scale_factor=0.5, mode='bilinear', align_corners=False, recompute_scale_factor=False)
             pyramid_gt.insert(0, down_img)
         return pyramid_gt
 
@@ -281,7 +281,7 @@ class GFPGANModel(BaseModel):
     def gray_resize_for_identity(self, out, size=128):
         out_gray = (0.2989 * out[:, 0, :, :] + 0.5870 * out[:, 1, :, :] + 0.1140 * out[:, 2, :, :])
         out_gray = out_gray.unsqueeze(1)
-        out_gray = F.interpolate(out_gray, (size, size), mode='bilinear', align_corners=False)
+        out_gray = F.interpolate(out_gray, (size, size), mode='bilinear', align_corners=False, recompute_scale_factor=False)
         return out_gray
 
     def optimize_parameters(self, current_iter):

@@ -140,9 +140,9 @@ class ModulatedConv2d(nn.Module):
         weight = weight.view(b * self.out_channels, c, self.kernel_size, self.kernel_size)
 
         if self.sample_mode == 'upsample':
-            x = F.interpolate(x, scale_factor=2, mode=self.interpolation_mode, align_corners=self.align_corners)
+            x = F.interpolate(x, scale_factor=2, mode=self.interpolation_mode, align_corners=self.align_corners, recompute_scale_factor=False)
         elif self.sample_mode == 'downsample':
-            x = F.interpolate(x, scale_factor=0.5, mode=self.interpolation_mode, align_corners=self.align_corners)
+            x = F.interpolate(x, scale_factor=0.5, mode=self.interpolation_mode, align_corners=self.align_corners, recompute_scale_factor=False)
 
         b, c, h, w = x.shape
         x = x.view(1, b * c, h, w)
@@ -558,7 +558,7 @@ class ConvLayer(nn.Sequential):
                 self.align_corners = False
 
             layers.append(
-                torch.nn.Upsample(scale_factor=0.5, mode=interpolation_mode, align_corners=self.align_corners))
+                torch.nn.Upsample(scale_factor=0.5, mode=interpolation_mode, align_corners=self.align_corners,recompute_scale_factor=False ))
         stride = 1
         self.padding = kernel_size // 2
         # conv

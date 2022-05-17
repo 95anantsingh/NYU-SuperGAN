@@ -104,7 +104,7 @@ def main(
                 # Target segmentation
                 seg = S(img[1][0])
                 if seg.shape[2:] != (res, res):
-                    seg = F.interpolate(seg, (res, res), mode='bicubic', align_corners=False)
+                    seg = F.interpolate(seg, (res, res), mode='bicubic', align_corners=False,recompute_scale_factor=False)
 
                 # Concatenate pyramid images with context to derive the final input
                 input = []
@@ -116,8 +116,8 @@ def main(
                 reenactment_img = Gr(input)
                 reenactment_seg = S(reenactment_img)
                 if reenactment_img.shape[2:] != (res, res):
-                    reenactment_img = F.interpolate(reenactment_img, (res, res), mode='bilinear', align_corners=False)
-                    reenactment_seg = F.interpolate(reenactment_seg, (res, res), mode='bilinear', align_corners=False)
+                    reenactment_img = F.interpolate(reenactment_img, (res, res), mode='bilinear', align_corners=False, recompute_scale_factor=False)
+                    reenactment_seg = F.interpolate(reenactment_seg, (res, res), mode='bilinear', align_corners=False, recompute_scale_factor=False)
 
                 # Remove unnecessary pyramids
                 for j in range(len(img)):

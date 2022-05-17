@@ -67,7 +67,7 @@ def upsample_product(x, y):
 
     # FOR ONNX CONVERSION
     # return F.interpolate(x, scale_factor=2, mode='nearest') * y
-    return F.interpolate(x, size=(int(H), int(W)), mode='bilinear', align_corners=False) * y
+    return F.interpolate(x, size=(int(H), int(W)), mode='bilinear', align_corners=False, recompute_scale_factor=False) * y
 
 
 def pa_multibox(output_channels):

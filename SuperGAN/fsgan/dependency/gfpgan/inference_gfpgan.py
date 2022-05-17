@@ -101,8 +101,10 @@ def main():
     else:
         raise ValueError(f'Wrong model version {args.version}.')
 
+    #>>>Edits
     data_dir = "/home/as14229/Shared/SuperGAN/data/"
     image_stages = {}
+    #>>>Edits end
 
     # Path to the weights directory (make sure it is correct):
     weights_dir = data_dir + 'weights'
@@ -130,6 +132,7 @@ def main():
         basename, ext = os.path.splitext(img_name)
         input_img = cv2.imread(img_path, cv2.IMREAD_COLOR)
 
+        
         # restore faces and background if necessary
         cropped_faces, restored_faces, restored_img = restorer.enhance(
             input_img, has_aligned=args.aligned, only_center_face=args.only_center_face, paste_back=True)

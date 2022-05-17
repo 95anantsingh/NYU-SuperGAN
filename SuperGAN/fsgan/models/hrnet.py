@@ -240,7 +240,7 @@ class HighResolutionModule(nn.Module):
                     y = y + F.interpolate(
                         self.fuse_layers[i][j](x[j]),
                         size=[x[i].shape[2], x[i].shape[3]],
-                        mode='bilinear', align_corners=False)
+                        mode='bilinear', align_corners=False, recompute_scale_factor=False)
                 else:
                     y = y + self.fuse_layers[i][j](x[j])
             x_fuse.append(self.relu(y))
@@ -440,9 +440,9 @@ class HighResolutionNet(nn.Module):
 
         # Head Part
         height, width = x[0].size(2), x[0].size(3)
-        x1 = F.interpolate(x[1], size=(height, width), mode='bilinear', align_corners=False)
-        x2 = F.interpolate(x[2], size=(height, width), mode='bilinear', align_corners=False)
-        x3 = F.interpolate(x[3], size=(height, width), mode='bilinear', align_corners=False)
+        x1 = F.interpolate(x[1], size=(height, width), mode='bilinear', align_corners=False, recompute_scale_factor=False)
+        x2 = F.interpolate(x[2], size=(height, width), mode='bilinear', align_corners=False, recompute_scale_factor=False)
+        x3 = F.interpolate(x[3], size=(height, width), mode='bilinear', align_corners=False, recompute_scale_factor=False)
         x = torch.cat([x[0], x1, x2, x3], 1)
         x = self.head(x)
 

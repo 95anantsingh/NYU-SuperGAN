@@ -12,6 +12,9 @@ segmentation masks will be computed and cached.
 import imp
 import os
 import sys
+from unittest import result
+
+from pyparsing import original_text_for
 sys.path.append(os.path.dirname(os.path.dirname(os.getcwd())))
 
 import argparse
@@ -45,7 +48,7 @@ from fsgan.utils.batch import main as batch
 #>>>Edits
 #Imports for GFPGAN
 from basicsr.utils import imwrite
-from fsgan.dependency.gfpgan.gfpgan import GFPGANer
+from fsgan.dependency.gfpgan.gfpgan.utils import GFPGANer
 os.system('export BASICSR_JIT="True"')
 #>>>Edits end
 
@@ -180,6 +183,28 @@ class FaceSwapping(VideoProcessBase):
                                                    self.crop_scale, encoder_codec, renderer_process)
         self.video_renderer.start()
 
+        #>>>Edits
+        # GFPGAN Initiation
+        arch = 'clean'
+        channel_multiplier = 2
+        model_name = 'GFPGANv1.3'
+        data_dir = "/home/as14229/Shared/SuperGAN/data/"
+        weights_dir = data_dir + 'weights'
+        model_path = os.path.join(weights_dir, model_name + '.pth')        
+
+        print('=> Loading face restoring model:\"'+  model_name + '.pth'+'\"...')
+
+        self.restorer = GFPGANer(
+                model_path=model_path,
+                upscale=2,
+                arch=arch,
+                channel_multiplier=channel_multiplier,
+                bg_upsampler=None
+        )
+
+        #>>>Edits end
+
+
     def __del__(self):
         if hasattr(self, 'video_renderer'):
             self.video_renderer.kill()
@@ -245,7 +270,7 @@ class FaceSwapping(VideoProcessBase):
         self.Gr.train(False)
 
     def __call__(self, source_path, target_path, output_path=None, select_source='longest', select_target='longest',
-                 finetune=None, upscale=2):
+                 finetune=None):
         is_vid = os.path.splitext(source_path)[1] == '.mp4'
         finetune = self.finetune_enabled and is_vid if finetune is None else finetune and is_vid
 
@@ -301,7 +326,6 @@ class FaceSwapping(VideoProcessBase):
 
         #>>>Edits
         data_dir = '/home/as14229/Shared/SuperGAN/data/'
-        weights_dir = data_dir + 'weights'
         image_stages = {}
 
         #>>>Edits end
@@ -319,13 +343,6 @@ class FaceSwapping(VideoProcessBase):
             bw = bw.to(self.device)
             bw_indices = torch.nonzero(torch.any(bw > 0, dim=0), as_tuple=True)[0]
             bw = bw[:, bw_indices]
-
-            #>>> Edits
-            image_stages["src_frame"] = src_frame[0][0][0]
-            image_stages["target_frame"] = tgt_frame[0]
-            
-            #>>> Edits end
-            
 
             # For each source frame perform reenactment
             reenactment_triplet = []
@@ -346,20 +363,8 @@ class FaceSwapping(VideoProcessBase):
             reenactment_seg = self.S(reenactment_tensor)
             reenactment_background_mask_tensor = (reenactment_seg.argmax(1) != 1).unsqueeze(1)
 
-            #>>> Edits
-            # image_stages["r1"] = reenactment_tensor[0]
-            image_stages["r_bg_mask"] = reenactment_background_mask_tensor[0]
-
-            #>>> Edits end
-
             # Remove the background of the aligned face
             reenactment_tensor.masked_fill_(reenactment_background_mask_tensor, -1.0)
-
-            #>>> Edits
-
-            image_stages["reenactment"] = reenactment_tensor[0]
-
-            #>>> Edits end
 
             # Soften target mask
             soft_tgt_mask, eroded_tgt_mask = self.smooth_mask(tgt_mask)
@@ -369,13 +374,6 @@ class FaceSwapping(VideoProcessBase):
             inpainting_input_tensor_pyd = create_pyramid(inpainting_input_tensor, 2)
             completion_tensor = self.Gc(inpainting_input_tensor_pyd)
 
-            #>>> Edits
-            image_stages["inpainting"] = inpainting_input_tensor[0]
-            # image_stages["inpainting_pyd"] = inpainting_input_tensor_pyd[0][0]
-            image_stages["completion"] = completion_tensor[0]
-
-            #>>> Edits end
-
             # Blend faces
             transfer_tensor = transfer_mask(completion_tensor, tgt_frame, eroded_tgt_mask)
             blend_input_tensor = torch.cat((transfer_tensor, tgt_frame, eroded_tgt_mask.float()), dim=1)
@@ -383,55 +381,30 @@ class FaceSwapping(VideoProcessBase):
             blend_tensor = self.Gb(blend_input_tensor_pyd)
             
 
-            #>>> Edits
-            image_stages["transfer"] = transfer_tensor[0]
-            # image_stages["blend_input"] = blend_input_tensor[0]
-            # image_stages["blend_input_pyd"] = blend_input_tensor_pyd[0][0]
-            image_stages["blend_final"] =  blend_tensor[0]
-
-            #>>> Edits end
-
-            # Final result
-            result_tensor = blend_tensor * soft_tgt_mask + tgt_frame * (1 - soft_tgt_mask)
+            # FSGAN Final result
+            fsgan_result_tensor = blend_tensor * soft_tgt_mask + tgt_frame * (1 - soft_tgt_mask)
             
-            #>>> Edits
-            image_stages["result"] = result_tensor[0]
+            # Final result
+            result_tensor= self.restorer.enhance(fsgan_result_tensor, has_aligned=True, paste_back=False)
+       
+            
+            #>>>Edits
+            #Save intermediate stages
 
-            # Face Restoration Generator
+            # image_stages["src_frame"] = src_frame[0][0][0]
+            # image_stages["target_frame"] = tgt_frame[0]
+            # image_stages["r_bg_mask"] = reenactment_background_mask_tensor[0]
+            # image_stages["reenactment"] = reenactment_tensor[0]
+            # image_stages["inpainting"] = inpainting_input_tensor[0]
+            # image_stages["completion"] = completion_tensor[0]
+            # image_stages["transfer"] = transfer_tensor[0]
+            # image_stages["blend_final"] =  blend_tensor[0]
+            # image_stages["fsgan_result"] = fsgan_result_tensor[0]
+            # image_stages["gfp_restored_face"] = result_tensor[0]
+            # torch.save(image_stages, data_dir + 'fsgan_test/fsgan_image_stages.pth')
 
-            #Set up GFPGAN restorer
-            print("=> Starting GFPGAN restorer")
-            arch = 'clean'
-            channel_multiplier = 2
-            model_name = 'GFPGANv1.3'
-
-            model_path = os.path.join(weights_dir, model_name + '.pth')
-            if not os.path.isfile(model_path):
-                print(model_path)
-                raise ValueError(f'Model {model_name} does not exist.')
-
-            restorer = GFPGANer(
-                model_path=model_path,
-                upscale=upscale,
-                arch=arch,
-                channel_multiplier=channel_multiplier,
-                bg_upsampler=None)
-
-            gfp_input_img = result_tensor[0]
-            print(gfp_input_img.shape)
-            cropped_face, restored_face, restored_img = restorer.enhance(
-                gfp_input_img, has_aligned=True, paste_back=True
-            )
-
-            image_stages["gfp_cropped_face"] = cropped_face
-            image_stages["gfp_restored_face"] = restored_face
-            image_stages["gfp_restored_img"] = restored_img
-
-            print("=> Completed GFPGAN restorer")
-            torch.save(image_stages, data_dir + 'fsgan_test/fsgan_image_stages.pth')
-
-            exit()
-            #>>> Edits end
+            # exit()
+            #>>>Edits end
 
 
             # Write output

@@ -93,7 +93,7 @@ class UpBlock(nn.Module):
         self.model = nn.Sequential(*model)
 
     def forward(self, x):
-        x = F.interpolate(x, scale_factor=2, mode='bilinear', align_corners=False)
+        x = F.interpolate(x, scale_factor=2, mode='bilinear', align_corners=False, recompute_scale_factor=False)
         return self.model(x)
 
 
