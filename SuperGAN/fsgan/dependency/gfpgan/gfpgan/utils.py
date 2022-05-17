@@ -135,18 +135,9 @@ class GFPGANer():
             cropped_face_t = cropped_face.unsqueeze(0).to(self.device)
 
             try:
-<<<<<<< HEAD
                 output = self.gfpgan(cropped_face_t, return_rgb=False)
                 restored_face = F.resize(output[0].squeeze(0),256)
                 stages = output[1]
-=======
-                output = self.gfpgan(cropped_face_t, return_rgb=True)[0]
-                #>>> Edits
-                image_stages["output"] = output[0]    
-                #>>> Edits end
-                # convert to image
-                restored_face = tensor2img(output.squeeze(0), rgb2bgr=True)
->>>>>>> 1105dc1fe5dc872fdd59c145a91fb6fa8a6a7c44
             except RuntimeError as error:
                 print(f'\tFailed inference for GFPGAN: {error}.')
                 restored_face = cropped_face
