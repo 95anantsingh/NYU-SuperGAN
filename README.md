@@ -53,7 +53,7 @@ cd SuperGAN
 python faceswap.py
 ```
 
-Now play `data/output/output.mp4` to see results
+Now play `data/output/output.mp4` to see results <br>
 Make necessary changes in faceswap.py for different input videos.
 
 <br>
