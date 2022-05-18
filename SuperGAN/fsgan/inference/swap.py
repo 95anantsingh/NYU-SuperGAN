@@ -187,8 +187,9 @@ class FaceSwapping(VideoProcessBase):
         # GFPGAN Initiation
         arch = 'clean'
         channel_multiplier = 2
-        model_name = 'GFPGANv1.3'
-        data_dir = "./data/"
+        model_name = 'GFPGANCleanv1-NoCE-C2'
+        three_up = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+        data_dir = three_up+"/data/"
         weights_dir = data_dir + 'weights'
         model_path = os.path.join(weights_dir, model_name + '.pth')        
 

@@ -25,7 +25,7 @@ batch_size = 8
 data_dir = "./data/"
 
 # Path to the weights directory (make sure it is correct):
-weights_dir = data_dir + '/weights'
+weights_dir = data_dir + 'weights'
 
 # Load model weights
 detection_model = os.path.join(weights_dir,'WIDERFace_DSFD_RES152.pth')

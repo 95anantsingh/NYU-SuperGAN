@@ -148,10 +148,10 @@ class GFPGANer():
         
         #>>> Edits
                    
-        image_stages["input"] = img
-        image_stages["stages"] = stages
-        image_stages["output"] = restored_face
-        torch.save(image_stages, data_dir + 'gfpgan_image_stages.pth')        
+        # image_stages["input"] = img
+        # image_stages["stages"] = stages
+        # image_stages["output"] = restored_face
+        # torch.save(image_stages, data_dir + 'gfpgan_image_stages.pth')        
 
         #>>> Edits end
 
