@@ -32,7 +32,6 @@
 
     ```bash
     conda env create -f environment.yml
-
     conda activate GAN
     ```
 
@@ -59,14 +58,20 @@ python faceswap.py
 Make necessary changes in faceswap.py for different input videos.
 
 
-## Project Structure
+## :file_folder: Project Structure
 
 1. `SuperGAN` contains all the project files
 2. `SuperGAN/data` contains input output videos and pretrained weights
 3. `SuperGAN/faceswap.py` main inference file
 
 
-## :scroll: License and Acknowledgement
+## :blue_book: Documentaion
+
+Project report can be found at [docs/SuperGAN_Report.pdf](https://github.com/95anantsingh/NYU-SuperGAN/tree/main/docs/project_report.pdf)
+<br>
+This Project was part of graduate level Deep Learning course at New York University
+
+## :scroll: License
 
 SuperGAN is released under Apache License Version 2.0.
 

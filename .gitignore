@@ -104,7 +104,8 @@ gpus.py
 # *.sh
 *.sbatch
 
-# Ignore inputs
+# Do not ignore gitkeep
+!.gitkeep
 
 
 # DO not ignore vscode setup
