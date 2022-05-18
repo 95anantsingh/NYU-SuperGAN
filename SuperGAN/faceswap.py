@@ -22,7 +22,7 @@ seg_batch_size = 64
 batch_size = 8
 
 # Set Data Directory
-data_dir = "/home/as14229/Shared/SuperGAN/data/"
+data_dir = "./data/"
 
 # Path to the weights directory (make sure it is correct):
 weights_dir = data_dir + '/weights'
@@ -54,20 +54,20 @@ face_swapping = FaceSwapping(
 finetune = True
 
 # Source path
-source_path = data_dir + 'inputs/shinzo_abe.mp4'
+source_path = data_dir + 'input/shinzo_abe.mp4'
 
 # Source selection method ["longest" | sequence number]:
 select_source = "longest"
 
 # Target path
-target_path = data_dir + 'inputs/conan_obrien.mp4'
+target_path = data_dir + 'input/conan_obrien.mp4'
 
 # Target selection method
 select_target = 'longest'
 
 # Outputs
-output_tmp_path = data_dir + 'fsgan_outputs/output_tmp.mp4'
-output_path = data_dir + 'fsgan_outputs/outputzz.mp4'
+output_tmp_path = data_dir + 'output/output_tmp.mp4'
+output_path = data_dir + 'output/output.mp4'
 
 # Select upscale value for GFPGAN
 # upscale = 2

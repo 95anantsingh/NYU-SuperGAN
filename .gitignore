@@ -105,8 +105,7 @@ gpus.py
 *.sbatch
 
 # Ignore inputs
-input/
-output/
+
 
 # DO not ignore vscode setup
 !.vscode/

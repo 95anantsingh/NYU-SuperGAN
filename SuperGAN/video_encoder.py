@@ -17,7 +17,7 @@ def generate_video(pathInV, pathInA, pathOut, fps):
 if __name__=="__main__":
     
     # Set Data Directory
-    data_dir = "/home/as14229/Shared/SuperGAN/data/"
+    data_dir = data/"
 
     a = ArgumentParser()
     a.add_argument("-i,","--pathInFrames", default=data_dir+'fsgan_outputs/output1_2/restored_imgs',help="Path to frames")

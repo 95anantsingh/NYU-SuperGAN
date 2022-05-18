@@ -12,7 +12,7 @@ os.system('export BASICSR_JIT="True"')
 
 
 def main():
-    data_dir = "/home/as14229/Shared/SuperGAN/data/"
+    data_dir = "./data/"
     """Inference demo for GFPGAN (for users).
     """
     parser = argparse.ArgumentParser()
@@ -102,7 +102,7 @@ def main():
         raise ValueError(f'Wrong model version {args.version}.')
 
     #>>>Edits
-    data_dir = "/home/as14229/Shared/SuperGAN/data/"
+    data_dir = "./data/"
     image_stages = {}
     #>>>Edits end
 

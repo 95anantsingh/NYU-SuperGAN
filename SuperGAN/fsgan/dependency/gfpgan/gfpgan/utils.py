@@ -120,7 +120,7 @@ class GFPGANer():
 
 
         #>>>Edits
-        data_dir = '/home/as14229/Shared/SuperGAN/data/gfpgan_test/'
+        data_dir = './data/gfpgan_test/'
         image_stages = {} 
         #>>> Edits end
 

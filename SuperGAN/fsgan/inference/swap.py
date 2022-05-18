@@ -188,7 +188,7 @@ class FaceSwapping(VideoProcessBase):
         arch = 'clean'
         channel_multiplier = 2
         model_name = 'GFPGANv1.3'
-        data_dir = "/home/as14229/Shared/SuperGAN/data/"
+        data_dir = "./data/"
         weights_dir = data_dir + 'weights'
         model_path = os.path.join(weights_dir, model_name + '.pth')        
 
@@ -325,7 +325,7 @@ class FaceSwapping(VideoProcessBase):
         print(f'=> Face swapping: "{src_vid_seq_name}" -> "{tgt_vid_seq_name}"...')
 
         #>>>Edits
-        data_dir = '/home/as14229/Shared/SuperGAN/data/'
+        data_dir = './data/'
         image_stages = {}
 
         #>>>Edits end

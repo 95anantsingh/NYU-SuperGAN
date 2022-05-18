@@ -1,0 +1,10 @@
+https://github.com/95anantsingh/NYU-SuperGAN/releases/download/v1.0.0/celeba_unet_256_1_2_segmentation_v2.pth
+https://github.com/95anantsingh/NYU-SuperGAN/releases/download/v1.0.0/celeba_vgg19_256_2_0_28_attr.pth
+https://github.com/95anantsingh/NYU-SuperGAN/releases/download/v1.0.0/GFPGANCleanv1-NoCE-C2.pth
+https://github.com/95anantsingh/NYU-SuperGAN/releases/download/v1.0.0/hopenet_robust_alpha1.pth
+https://github.com/95anantsingh/NYU-SuperGAN/releases/download/v1.0.0/hr18_wflw_landmarks.pth
+https://github.com/95anantsingh/NYU-SuperGAN/releases/download/v1.0.0/ijbc_msrunet_256_1_2_blending_v2.pth
+https://github.com/95anantsingh/NYU-SuperGAN/releases/download/v1.0.0/ijbc_msrunet_256_1_2_inpainting_v2.pth
+https://github.com/95anantsingh/NYU-SuperGAN/releases/download/v1.0.0/nfv_msrunet_256_1_2_reenactment_v2.1.pth
+https://github.com/95anantsingh/NYU-SuperGAN/releases/download/v1.0.0/vggface2_vgg19_256_1_2_id.pth
+https://github.com/95anantsingh/NYU-SuperGAN/releases/download/v1.0.0/WIDERFace_DSFD_RES152.pth

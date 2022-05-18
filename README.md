@@ -9,16 +9,17 @@
 
 ## :wrench: Dependencies and Installation
 
+### Dependencies
 - [Anaconda](https://www.anaconda.com/download/#linux) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html)
 - Python = 3.8
 - [PyTorch = 1.10](https://pytorch.org/)
-- NVIDIA GPU + [CUDA](https://developer.nvidia.com/cuda-downloads)
+- NVIDIA GPU (atleast 8 GB) + [CUDA](https://developer.nvidia.com/cuda-downloads) = 11.3
 - Linux
+
 
 ### Installation
 
-We now provide a *clean* version of GFPGAN, which does not require customized CUDA extensions. <br>
-If you want to use the original model in our paper, please see [PaperModel.md](PaperModel.md) for installation.
+
 
 1. Clone repo
 
@@ -35,13 +36,12 @@ If you want to use the original model in our paper, please see [PaperModel.md](P
     conda activate GAN
     ```
 
-<!-- 1. Download weights
+1. Download weights
 
     ```bash
-    conda env create -f environment.yml
-
-    conda activate GAN
-    ``` -->
+    wget -i SuperGAN/weight_urls --directory-prefix SuperGAN/data/weights
+    ```
+    
 
 
 ## :zap: Quick Inference
@@ -50,14 +50,20 @@ If you want to use the original model in our paper, please see [PaperModel.md](P
 
 ### Inference
 
-Make necessary changes in faceswap.py before running.
+
 ```bash
 cd SuperGAN
 python faceswap.py
 ```
 
-If you want to use the original model in our paper, please see [PaperModel.md](PaperModel.md) for installation and inference.
+Make necessary changes in faceswap.py for different input videos.
 
+
+## Project Structure
+
+1. `SuperGAN` contains all the project files
+2. `SuperGAN/data` contains input output videos and pretrained weights
+3. `SuperGAN/faceswap.py` main inference file
 
 
 ## :scroll: License and Acknowledgement
