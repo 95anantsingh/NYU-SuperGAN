@@ -5,7 +5,7 @@
 
 </p>
 
----
+<br>
 
 ## :wrench: Dependencies and Installation
 
@@ -16,6 +16,7 @@
 - NVIDIA GPU (atleast 8 GB) + [CUDA](https://developer.nvidia.com/cuda-downloads) = 11.3
 - Linux
 
+<br>
 
 ### Installation
 
@@ -41,13 +42,9 @@
     wget -i SuperGAN/weight_urls --directory-prefix SuperGAN/data/weights
     ```
     
-
+<br>
 
 ## :zap: Quick Inference
-
-
-
-### Inference
 
 
 ```bash
@@ -57,6 +54,7 @@ python faceswap.py
 
 Make necessary changes in faceswap.py for different input videos.
 
+<br>
 
 ## :file_folder: Project Structure
 
@@ -64,17 +62,21 @@ Make necessary changes in faceswap.py for different input videos.
 2. `SuperGAN/data` contains input output videos and pretrained weights
 3. `SuperGAN/faceswap.py` main inference file
 
+<br>
 
 ## :blue_book: Documentaion
 
-Project report can be found at [docs/SuperGAN_Report.pdf](https://github.com/95anantsingh/NYU-SuperGAN/tree/main/docs/project_report.pdf)
+Project report can be found at [docs/SuperGAN_Report.pdf](https://github.com/95anantsingh/NYU-SuperGAN/blob/integrated/docs/SuperGAN_Report.pdf)
 <br>
-This Project was part of graduate level Deep Learning course at New York University
+>This Project was part of graduate level Deep Learning course at New York University
+
+<br>
 
 ## :scroll: License
 
 SuperGAN is released under Apache License Version 2.0.
 
+<br>
 
 ## :e-mail: Contact
 
