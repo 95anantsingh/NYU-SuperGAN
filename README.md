@@ -33,7 +33,7 @@
 
     ```bash
     conda env create -f environment.yml
-    conda activate GAN
+    conda activate SuperGAN
     ```
 
 1. Download weights

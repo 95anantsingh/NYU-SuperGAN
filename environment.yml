@@ -1,4 +1,4 @@
-name: GAN
+name: SuperGAN
 channels:
   - conda-forge
   - defaults
@@ -281,5 +281,5 @@ dependencies:
     - tifffile==2022.5.4
     - werkzeug==2.1.2
     - yapf==0.32.0
-prefix: GAN
+prefix: SuperGAN
 
