@@ -1,7 +1,8 @@
 <p align="center">
   <h1>SuperGAN</h1>
 
-[![LICENSE](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/TencentARC/GFPGAN/blob/master/LICENSE)  
+[![LICENSE](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/95anantsingh/NYU-SuperGAN/blob/integrated/LICENSE)  
+[![PYTHON](https://img.shields.io/badge/python-v3.8-red.svg)]()
 
 
 </p>
@@ -52,6 +53,7 @@ cd SuperGAN
 python faceswap.py
 ```
 
+Now play `data/output/output.mp4` to see results
 Make necessary changes in faceswap.py for different input videos.
 
 <br>
