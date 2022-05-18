@@ -3,6 +3,7 @@
 
 [![LICENSE](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/TencentARC/GFPGAN/blob/master/LICENSE)  
 
+
 </p>
 
 <br>
@@ -16,7 +17,6 @@
 - NVIDIA GPU (atleast 8 GB) + [CUDA](https://developer.nvidia.com/cuda-downloads) = 11.3
 - Linux
 
-<br>
 
 ### Installation
 
@@ -98,6 +98,9 @@ If you have any question, please email `anant.singh@nyu.edu`
 4. Run - `SuperGAN_DATA` for switching to data directory whenever required.
 
 <br><br>
+
+
+deep-learning pytorch gan face segmentation swapping reenactment
 
 # How to
 
