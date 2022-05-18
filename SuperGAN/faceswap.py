@@ -28,14 +28,14 @@ data_dir = "/home/as14229/Shared/SuperGAN/data/"
 weights_dir = data_dir + '/weights'
 
 # Load model weights
-detection_model = os.path.join(weights_dir,'v2/WIDERFace_DSFD_RES152.pth')
-pose_model = os.path.join(weights_dir, 'shared/hopenet_robust_alpha1.pth')
-lms_model = os.path.join(weights_dir, 'v2/hr18_wflw_landmarks.pth')
-seg_model = os.path.join(weights_dir, 'v2/celeba_unet_256_1_2_segmentation_v2.pth')
-reenactment_model = os.path.join(weights_dir, 'v2/nfv_msrunet_256_1_2_reenactment_v2.1.pth')
-completion_model = os.path.join(weights_dir, 'v2/ijbc_msrunet_256_1_2_inpainting_v2.pth')
-blending_model = os.path.join(weights_dir, 'v2/ijbc_msrunet_256_1_2_blending_v2.pth')
-criterion_id_path = os.path.join(weights_dir, 'v2/vggface2_vgg19_256_1_2_id.pth')
+detection_model = os.path.join(weights_dir,'WIDERFace_DSFD_RES152.pth')
+pose_model = os.path.join(weights_dir, 'hopenet_robust_alpha1.pth')
+lms_model = os.path.join(weights_dir, 'hr18_wflw_landmarks.pth')
+seg_model = os.path.join(weights_dir, 'celeba_unet_256_1_2_segmentation_v2.pth')
+reenactment_model = os.path.join(weights_dir, 'nfv_msrunet_256_1_2_reenactment_v2.1.pth')
+completion_model = os.path.join(weights_dir, 'ijbc_msrunet_256_1_2_inpainting_v2.pth')
+blending_model = os.path.join(weights_dir, 'ijbc_msrunet_256_1_2_blending_v2.pth')
+criterion_id_path = os.path.join(weights_dir, 'vggface2_vgg19_256_1_2_id.pth')
 criterion_id = VGGLoss(criterion_id_path)
 
 # Initial Swapping object
