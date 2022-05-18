@@ -2,7 +2,8 @@
 
 # <b>SuperGAN</b>
 
-[![LICENSE](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/95anantsingh/NYU-SuperGAN/blob/integrated/LICENSE) [![PYTHON](https://img.shields.io/badge/python-v3.8-red.svg)]()
+[![LICENSE](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/95anantsingh/NYU-SuperGAN/blob/integrated/LICENSE) [![PYTHON](https://img.shields.io/badge/python-v3.8-yellow.svg)]() [![PYTORCH](https://img.shields.io/badge/PyTorch-v1.10-red.svg)](https://pytorch.org/) [![CUDA](https://img.shields.io/badge/CUDA-v11.3-green.svg)](https://pytorch.org/) 
+
 </div>
 
 
