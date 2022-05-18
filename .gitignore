@@ -107,6 +107,13 @@ gpus.py
 # Do not ignore gitkeep
 !.gitkeep
 
-
 # DO not ignore vscode setup
 !.vscode/
+
+# Ignore output dir
+output/
+
+# Ignore other inputs
+input/
+!conan_obrien.mp4
+!shinzo_abe.mp4
