@@ -2,7 +2,7 @@
 
 # <b>SuperGAN</b>
 
-[![LICENSE](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/95anantsingh/NYU-SuperGAN/blob/integrated/LICENSE) [![PYTHON](https://img.shields.io/badge/python-v3.8-yellow.svg)]() [![PYTORCH](https://img.shields.io/badge/PyTorch-v1.10-red.svg)](https://pytorch.org/) [![CUDA](https://img.shields.io/badge/CUDA-v11.3-green.svg)](https://pytorch.org/) 
+[![LICENSE](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/95anantsingh/NYU-SuperGAN/blob/integrated/LICENSE) [![PYTHON](https://img.shields.io/badge/python-v3.8-yellow.svg)]() [![PYTORCH](https://img.shields.io/badge/PyTorch-v1.10.2-red.svg)](https://pytorch.org/) [![CUDA](https://img.shields.io/badge/CUDA-v11.3-green.svg)](https://pytorch.org/) 
 
 </div>
 
@@ -14,7 +14,7 @@
 ### Dependencies
 - [Anaconda](https://www.anaconda.com/download/#linux) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html)
 - Python = 3.8
-- [PyTorch = 1.10](https://pytorch.org/)
+- [PyTorch = 1.10.2](https://pytorch.org/)
 - NVIDIA GPU (atleast 8 GB) + [CUDA](https://developer.nvidia.com/cuda-downloads) = 11.3
 - Linux
 
@@ -66,7 +66,7 @@ Make necessary changes in faceswap.py for different input videos.
 
 <br>
 
-## :blue_book: Documentaion
+## :blue_book: Documentation
 
 Project report can be found at [docs/SuperGAN_Report.pdf](https://github.com/95anantsingh/NYU-SuperGAN/blob/integrated/docs/SuperGAN_Report.pdf)
 <br>
