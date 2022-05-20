@@ -15,7 +15,7 @@
 - [Anaconda](https://www.anaconda.com/download/#linux) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html)
 - Python = 3.8
 - [PyTorch = 1.10.2](https://pytorch.org/)
-- NVIDIA GPU (atleast 8 GB) + [CUDA](https://developer.nvidia.com/cuda-downloads) = 11.3
+- NVIDIA GPU (24 GB recommended) + [CUDA](https://developer.nvidia.com/cuda-downloads) = 11.3
 - Linux
 
 
@@ -70,7 +70,8 @@ Make necessary changes in faceswap.py for different input videos.
 
 Project report can be found at [docs/SuperGAN_Report.pdf](https://github.com/95anantsingh/NYU-SuperGAN/blob/integrated/docs/SuperGAN_Report.pdf)
 <br>
->This Project was part of graduate level Deep Learning course at New York University
+> Ideal setup is with NVIDIA Quadro RTX 8000 (48 GB GDDR6) on Linux
+
 
 <br>
 
@@ -83,7 +84,8 @@ SuperGAN is released under Apache License Version 2.0.
 ## :e-mail: Contact
 
 If you have any question, please email `anant.singh@nyu.edu`
-
+<br> 
+> This Project was part of graduate level Deep Learning course at New York University
 
 <!-- # To-Do
 
