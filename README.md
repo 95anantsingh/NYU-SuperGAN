@@ -34,7 +34,6 @@
 
     ```bash
     conda env create -f environment.yml
-    conda activate SuperGAN
     ```
 
 1. Download weights
@@ -50,6 +49,7 @@
 
 ```bash
 cd SuperGAN
+conda activate SuperGAN
 python faceswap.py
 ```
 
